@@ -1,0 +1,18 @@
+{
+  "mcpServers": {
+    "mariadb": {
+      "command": "bash",
+      "args": [
+        "-lc",
+        "command -v mariadb_config >/dev/null 2>&1 || apt-get install -y -qq libmariadb-dev >/dev/null 2>&1 || { apt-get update -qq >/dev/null 2>&1 || true; apt-get install -y -qq libmariadb-dev >/dev/null 2>&1; }; exec uvx --from 'mariadb-mcp-server==0.1.1' python -m mariadb_mcp_server.server"
+      ],
+      "env": {
+        "MARIADB_HOST": "${MARIADB_HOST}",
+        "MARIADB_PORT": "${MARIADB_PORT:-3306}",
+        "MARIADB_USER": "${MARIADB_USER}",
+        "MARIADB_PASSWORD": "${MARIADB_PASSWORD}",
+        "MARIADB_DATABASE": "${MARIADB_DATABASE:-da}"
+      }
+    }
+  }
+}
